@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Steven Pautt</title>
+</head>
+<body>
+    <h1>Sobre mí</h1>
+    <p>Hola! mi nombre es Steven Pautt actualmente estudio Ingenieria de Software en la <a id="linkUdc" href="https://unicartagena.edu.co/">Universidad De Cartagena.</a><br/>Me encantaria ser un exitoso desarrolador de soluciones digitales y gracias a esto poder tener una estabilidad economica, poder viajar y compartir con mi pareja</p>
+    <h2>Habilidades</h2>
+    <input id="habilidadInput" type="text" placeholder="Habilidad">
+    <button id="btnAgregarHabilidad">Agregar Habilidad</button>
+    <ul id="misHabilidades">
+        <li class="li1">HTML - BASICO</li>
+        <li class="li2">CSS - BASICO</li>
+        <li class="li3">JAVASCRIPT - INTERMEDIO</li>
+    </ul>
+    <button id="btnCambiarColor">Cambiar Color</button>
+    
+    <footer>
+        <small class="foColor">Cartagena, Colombia</small>
+    </footer>
+</body>
+<script>
+    const btn = document.querySelector('#btnCambiarColor');
+    const inputHabilidad = document.getElementById('habilidadInput');
+    const btnAgregarHabilidad = document.getElementById('btnAgregarHabilidad');
+    const misHabilidades = document.getElementById('misHabilidades');
+
+    btn.addEventListener('click',() =>{
+        document.body.classList.toggle('cambiar-fondo');
+    });
+
+    btnAgregarHabilidad.addEventListener('click',() =>{
+        const text = inputHabilidad.value;
+
+        if(text.trim() === ""){
+            alert("Ingresa una habilidad para continuar")
+            return;
+        }
+
+        const nuevaHabilidad = document.createElement('li');
+        nuevaHabilidad.classList.add('li1'); 
+        nuevaHabilidad.textContent = text;
+
+        misHabilidades.appendChild(nuevaHabilidad);
+
+        inputHabilidad.value ="";
+        inputHabilidad.focus();
+    })
+</script>
+</html>

@@ -1,0 +1,26 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(247, 247, 247);
+    transition: background-color 0.5s ease;
+}
+
+.cambiar-fondo{
+    background-color: rgba(131, 133, 133, 0.322);
+}
+
+#linkUdc:hover{
+    color: greenyellow;
+}
+
+.li1{
+    background-color: blue;
+}
+.li2{
+    background-color: red;
+}
+.li3{
+    background-color: gold;
+}
+.foColor{
+    color: gray;
+}
