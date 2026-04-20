@@ -42,9 +42,12 @@
     const btn = document.querySelector('#btnCambiarColor');
     const inputHabilidad = document.getElementById('habilidadInput');
     const btnAgregarHabilidad = document.getElementById('btnAgregarHabilidad');
-    const misHabilidades = ["HTML","CSS","JAVASCRIPT"];
+    const datosGuardados = localStorage.getItem("habilidades")
+    const misHabilidades =JSON.parse(datosGuardados) || ["HTML","CSS","JAVASCRIPT"];
     const listaHabilidades = document.getElementById('misHabilidades');
     const misClases = ["li1", "li2", "li3"];
+
+    
 
     for (let index = 0; index < misHabilidades.length; index++) {
         const nuevoLi =document.createElement("li");
@@ -74,6 +77,7 @@
 
         listaHabilidades.appendChild(nuevaHabilidad);
         misHabilidades.push(text);
+        localStorage.setItem("habilidades", JSON.stringify(misHabilidades))
 
         inputHabilidad.value ="";
         inputHabilidad.focus();
