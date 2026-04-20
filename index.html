@@ -14,9 +14,6 @@
     <input id="habilidadInput" type="text" placeholder="Habilidad">
     <button id="btnAgregarHabilidad">Agregar Habilidad</button>
     <ul id="misHabilidades">
-        <li class="li1">HTML - BASICO</li>
-        <li class="li2">CSS - BASICO</li>
-        <li class="li3">JAVASCRIPT - INTERMEDIO</li>
     </ul>
     <h2>Contacto</h2>
     <div class="contenedor-contacto">
@@ -45,7 +42,18 @@
     const btn = document.querySelector('#btnCambiarColor');
     const inputHabilidad = document.getElementById('habilidadInput');
     const btnAgregarHabilidad = document.getElementById('btnAgregarHabilidad');
-    const misHabilidades = document.getElementById('misHabilidades');
+    const misHabilidades = ["HTML","CSS","JAVASCRIPT"];
+    const listaHabilidades = document.getElementById('misHabilidades');
+    const misClases = ["li1", "li2", "li3"];
+
+    for (let index = 0; index < misHabilidades.length; index++) {
+        const nuevoLi =document.createElement("li");
+        
+        nuevoLi.textContent = misHabilidades[index];
+
+        nuevoLi.classList.add(misClases[index % misClases.length]);
+        listaHabilidades.appendChild(nuevoLi)
+    }
 
     btn.addEventListener('click',() =>{
         document.body.classList.toggle('cambiar-fondo');
@@ -53,6 +61,7 @@
 
     btnAgregarHabilidad.addEventListener('click',() =>{
         const text = inputHabilidad.value;
+        const total = listaHabilidades.children.length;
 
         if(text.trim() === ""){
             alert("Ingresa una habilidad para continuar")
@@ -60,10 +69,11 @@
         }
 
         const nuevaHabilidad = document.createElement('li');
-        nuevaHabilidad.classList.add('li1'); 
+        nuevaHabilidad.classList.add(misClases[total % misClases.length]); 
         nuevaHabilidad.textContent = text;
 
-        misHabilidades.appendChild(nuevaHabilidad);
+        listaHabilidades.appendChild(nuevaHabilidad);
+        misHabilidades.push(text);
 
         inputHabilidad.value ="";
         inputHabilidad.focus();
