@@ -27,6 +27,12 @@ body{
 .li3{
     background-color: gold;
 }
+
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .foColor{
     color: gray;
 }
@@ -80,4 +86,10 @@ h2 {
     .contacto-item{
         width: 90%;
     }
+}
+
+.spanDelete{
+    color: aliceblue;
+    cursor: pointer;
+    font-style:italic;
 }

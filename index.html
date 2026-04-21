@@ -39,6 +39,7 @@
     
 </body>
 <script>
+
     const btn = document.querySelector('#btnCambiarColor');
     const inputHabilidad = document.getElementById('habilidadInput');
     const btnAgregarHabilidad = document.getElementById('btnAgregarHabilidad');
@@ -47,15 +48,37 @@
     const listaHabilidades = document.getElementById('misHabilidades');
     const misClases = ["li1", "li2", "li3"];
 
-    
+    function crearHabilidad(texto,index){
+        const li = document.createElement('li');
+        const spanTexto = document.createElement('span');
+        const btnBorarr = document.createElement('span');
 
-    for (let index = 0; index < misHabilidades.length; index++) {
-        const nuevoLi =document.createElement("li");
-        
-        nuevoLi.textContent = misHabilidades[index];
+        spanTexto.textContent = texto;
+        btnBorarr.textContent = 'X';
+        btnBorarr.classList.add('spanDelete');
 
-        nuevoLi.classList.add(misClases[index % misClases.length]);
-        listaHabilidades.appendChild(nuevoLi)
+        li.classList.add(misClases[index % misClases.length]);
+
+        li.appendChild(spanTexto);
+        li.appendChild(btnBorarr)
+
+        btnBorarr.addEventListener('click', ()=>{
+            li.remove();
+
+            const posicion = misHabilidades.indexOf(texto);
+            if (posicion !== -1) {
+                misHabilidades.splice(posicion, 1)
+            }
+
+            localStorage.setItem("habilidades", JSON.stringify(misHabilidades));
+        })
+
+        return li;
+    }
+     
+    for (let i = 0; i < misHabilidades.length; i++) {
+        const elemento = crearHabilidad(misHabilidades[i], i);
+        listaHabilidades.appendChild(elemento);
     }
 
     btn.addEventListener('click',() =>{
@@ -63,24 +86,26 @@
     });
 
     btnAgregarHabilidad.addEventListener('click',() =>{
-        const text = inputHabilidad.value;
-        const total = listaHabilidades.children.length;
+        const text = inputHabilidad.value.trim();
 
         if(text.trim() === ""){
-            alert("Ingresa una habilidad para continuar")
+            alert("Ingresa una habilidad")
             return;
         }
+        const total = listaHabilidades.children.length;
 
-        const nuevaHabilidad = document.createElement('li');
-        nuevaHabilidad.classList.add(misClases[total % misClases.length]); 
-        nuevaHabilidad.textContent = text;
+        const nuevaHabilidad = crearHabilidad(text,total);
 
         listaHabilidades.appendChild(nuevaHabilidad);
-        misHabilidades.push(text);
-        localStorage.setItem("habilidades", JSON.stringify(misHabilidades))
 
-        inputHabilidad.value ="";
+        //Guardar
+
+        misHabilidades.push(text);
+        localStorage.setItem("habilidades",JSON.stringify(misHabilidades));
+
+        inputHabilidad.value = "";
         inputHabilidad.focus();
+
     })
 </script>
-</html>
+</html> 
